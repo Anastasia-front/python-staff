@@ -14,6 +14,10 @@ class Staff(UserDict):
         for name, record in self.data.items():
             print(record)
 
+    def show_all_birthdays(self):
+        for name, record in self.data.items():
+            print(record.birthday)
+
     def delete(self, name: str):
         if name in self.data:
             del self.data[name]

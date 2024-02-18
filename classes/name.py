@@ -4,14 +4,14 @@ from .field import Field
 class Name(Field):
     def __init__(self, value):
         try:
-            if not value.find("_").isalpha():
+            if " " not in value:
                 raise ValueError(
-                    "name must consist of name and surname and split by underscore (example: name_surname)"
+                    "name must consist of name and surname and split by space (example: name surname)"
                 )
+            else:
+                super().__init__(value.lower())
 
-            # Capitalize the first letter of each word
-            capitalized_name = " ".join(word.capitalize() for word in value.split())
-
-            super().__init__(capitalized_name)
-        except ValueError as e:
-            print(e)
+        except ValueError:
+            raise ValueError(
+                "name must consist of name and surname and split by space (example: name surname)"
+            )

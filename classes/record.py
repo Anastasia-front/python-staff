@@ -20,29 +20,28 @@ class Record:
 
         name, position = args
 
-        if Position(position) and Name(name):
-            exist = book.find( Name(name))
-            if not exist:
-                record = cls(name)
-                record.positions.append(Position(position))
-                book.add_record(record)
-                return "position added"
-            else:
-                exist.positions.append(Position(position))
-                return "position added"
+        # if Position(position) and Name(name):
+        exist = book.find(name)
+        if not exist:
+            record = cls(name)
+            record.positions.append(Position(position))
+            book.add_record(record)
+            return "position added"
         else:
-            return "invalid name or position"
-    
+            exist.positions.append(Position(position))
+            return "position added"
+        # else:
+        #     return "invalid name or position"
+
     @classmethod
     def add_birthday(cls, args: list, book):
         if len(args) < 2:
             return "provide both name and date for the birthday"
 
         name, date = args
-
         try:
             datetime.strptime(date, "%d.%m.%Y")
-            exist = book.find(name.capitilize())
+            exist = book.find(name)
             if not exist:
                 return "employee not found"
             else:
@@ -100,11 +99,6 @@ class Record:
 
         name, old_position, new_position = args
 
-        if (not old_position.isdigit() or len(old_position) != 10) or (
-            not new_position.isdigit() or len(new_position) != 10
-        ):
-            return "position number must consist of 10 digits"
-
         exist = book.find(name)
         if not exist:
             return "employee not found"
@@ -143,7 +137,10 @@ class Record:
 
         for name, record in book.data.items():
             if name == employee:
-                return record
+                if record.positions:
+                    return record.positions
+                else:
+                    return "employee has no position"
             else:
                 continue
         return "employee not found"
@@ -158,7 +155,10 @@ class Record:
 
         for name, record in book.data.items():
             if employee == name:
-                return record.birthday
+                if record.birthday:
+                    return record.birthday
+                else:
+                    return "employee has no birthday"
             else:
                 continue
         return "employee not found"
@@ -175,4 +175,6 @@ class Record:
 
         positions_info = ", ".join(str(p) for p in self.positions)
 
-        return f"      - Name: {self.name.value} | Position: {positions_info} |  {birthday_info}"
+        return (
+            f"      - Name: {self.name} | Position: {positions_info} |  {birthday_info}"
+        )

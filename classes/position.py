@@ -6,6 +6,8 @@ class Position(Field):
         try:
             if not value.isalpha():
                 raise ValueError("position must consist of letters")
-            super().__init__(value)
-        except ValueError as e:
-            print(e)
+            else:
+                super().__init__(value)
+
+        except ValueError:
+            raise ValueError("position must consist of letters")
