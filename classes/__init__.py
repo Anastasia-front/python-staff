@@ -1,4 +1,4 @@
 from .staff import Staff
-from .record import Record
+from .employee import Employee
 
-__all__ = [Record, Staff]
+__all__ = [Employee, Staff]

@@ -1,17 +1,39 @@
+# from functions import get_upcoming_birthdays
 from datetime import datetime
-
-from functions import get_upcoming_birthdays
 
 from .birthday import Birthday
 from .name import Name
 from .position import Position
 
+current_datetime = datetime.now()
+current_year = current_datetime.year
 
-class Record:
+
+class Employee:
     def __init__(self, name: str):
         self.name = Name(name)
         self.positions = []
         self.birthday = None
+        self.age = None
+
+    def calculate_age(self):
+        if self.birthday:
+            str_birthday = str(self.birthday)
+            birth_year = int(str_birthday.split(".")[2])
+            return current_year - birth_year
+
+    @classmethod
+    def get_age(cls, args: list, book):
+        if len(args) < 1:
+            return "provide name of the employee"
+
+        name = args[0]
+
+        exist = book.find(name)
+        if not exist:
+            return "employee not found"
+        else:
+            return f"{exist.name} is {exist.calculate_age()} y.o"
 
     @classmethod
     def add_position(cls, args: list, book):
@@ -20,7 +42,6 @@ class Record:
 
         name, position = args
 
-        # if Position(position) and Name(name):
         exist = book.find(name)
         if not exist:
             record = cls(name)
@@ -30,8 +51,6 @@ class Record:
         else:
             exist.positions.append(Position(position))
             return "position added"
-        # else:
-        #     return "invalid name or position"
 
     @classmethod
     def add_birthday(cls, args: list, book):
@@ -46,9 +65,9 @@ class Record:
                 return "employee not found"
             else:
                 exist.birthday = Birthday(date)
-                return "Birthday added"
+                return "birthday added"
         except ValueError:
-            return "Invalid date format. Use DD.MM.YYYY"
+            return "invalid date format. Use DD.MM.YYYY"
 
     @classmethod
     def remove_position(cls, args: list, book):
@@ -76,7 +95,7 @@ class Record:
             return "employee not found"
         else:
             exist.birthday = None
-            return "Birthday deleted"
+            return "birthday deleted"
 
     @classmethod
     def remove_employee(cls, args: list, book):
@@ -123,9 +142,9 @@ class Record:
                 return "employee not found"
             else:
                 exist.birthday = Birthday(date)
-                return "Birthday changed"
+                return "birthday changed"
         except ValueError:
-            return "Invalid date format. Use DD.MM.YYYY"
+            return "invalid date format. Use DD.MM.YYYY"
 
     @classmethod
     def find_position(cls, args: list, book) -> Position:
@@ -163,15 +182,54 @@ class Record:
                 continue
         return "employee not found"
 
-    @classmethod
-    def birthdays(cls, args: list, book) -> Birthday:
-        get_upcoming_birthdays(book)
+    # @classmethod
+    # def coming_birthdays(cls, args: list, book) -> Birthday:
+    #     upcoming_birthdays = []
+
+    #     if not book:
+    #         return "no birthdays yet"
+
+    #     for employee in book:
+    #         date = employee.birthday
+    #         datetime_object = datetime.strptime(date, "%Y.%m.%d")
+    #         day = datetime_object.weekday()
+
+    #         if day == 6:
+    #             day_interval = timedelta(days=2)
+    #             datetime_object = datetime_object + day_interval
+    #         elif day == 7:
+    #             day_interval = timedelta(days=1)
+    #             datetime_object = datetime_object + day_interval
+
+    #         target_day = datetime_object.day
+
+    #         # Calculate the number of days until the next birthday
+    #         days_until_birthday = (datetime_object - current_datetime).days
+
+    #         # Check if the birthday is within the next week
+    #         if 0 <= days_until_birthday <= 7:
+    #             date = str(current_year) + date[4:8] + str(target_day)
+
+    #         employee.congratulation_date = date
+    #         upcoming_birthdays.append(employee)
+
+    #     message = "List for congratulations on the current week:\n"
+    #     employee.age = employee.calculate_age()
+
+    #     for employee in upcoming_birthdays:
+    #         birthday_date = employee.congratulation_date
+    #         formatted_birthday = datetime.strptime(birthday_date, "%Y%m%d").strftime(
+    #             "%A, %d of %B"
+    #         )
+    #         message += f"{formatted_birthday} - {employee.name}, {employee.age} years, had a birthday on {datetime_object.strftime('%A')}\n"
+
+    #     return message
 
     def __str__(self):
 
         birthday_info = ""
         if self.birthday:
-            birthday_info = f"Birthday date: {self.birthday.value.strftime('%d %B %Y')}"
+            birthday_info = f"Birthday date: {self.birthday.value.strftime('%d.%m.%Y')}"
 
         positions_info = ", ".join(str(p) for p in self.positions)
 

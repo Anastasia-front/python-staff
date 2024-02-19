@@ -1,30 +1,50 @@
-from classes import Record, Staff
+from classes import Employee, Staff
 from functions import parse_input
 
 
 def main():
     book = Staff()
     methods = {
-        "ap": Record.add_position,  # add position
-        "cp": Record.edit_position,  # change position
-        "fp": Record.find_position,  # find position
-        "dp": Record.remove_position,  # delete position
-        "ab": Record.add_birthday,  # add birthday
-        "fb": Record.find_birthday,  # find birthday
-        "de": Record.remove_employee,  # delete employee
-        # "all-b": Record.birthdays,  # all birthdays
-        # "all-info": Staff.show_all,  # all info
+        "ap": Employee.add_position,
+        "cp": Employee.edit_position,
+        "fp": Employee.find_position,
+        "dp": Employee.remove_position,
+        "ab": Employee.add_birthday,
+        "fb": Employee.find_birthday,
+        "ga": Employee.get_age,
+        "de": Employee.remove_employee,
     }
 
-    print("Welcome to the assistant bot!")
+    commands = [
+        "ap/[name]/[position] - add position",
+        "cp/[name]/[old_position]/[new_position] - change position",
+        "fp/[name]  - find position",
+        "dp/[name]  - delete position",
+        "ab/[name]/[date]  - add birthday",
+        "fb/[name]  - find birthday",
+        "ga/[name]  - get age",
+        "de/[name]  - delete employee",
+        "all-info - show all info",
+        "all-b - show all birthdays",
+        "all-b-c - show all birthdays on current week",
+        "commands  - display all commands",
+        "close  - close the program",
+        "exit  - exit the program",
+    ]
+
+    print("Book staff")
 
     while True:
         try:
             user_input = input("Enter a command: ")
             command, *args = parse_input(user_input)
 
-            if command in ["close", "exit"]:
-                print("Good bye!")
+            if command == "close":
+                print("Good bye")
+                break
+
+            elif command == "exit":
+                print("Have a nice day")
                 break
 
             elif command == "all-info":
@@ -33,8 +53,15 @@ def main():
             elif command == "all-b":
                 book.show_all_birthdays()
 
+            elif command == "all-c-b":
+                book.show_coming_birthdays()
+
             elif command in methods:
                 print((methods[command])(args, book))
+
+            elif command == "commands":
+                for cmd in commands:
+                    print(cmd)
 
             else:
                 print("Invalid command.")
