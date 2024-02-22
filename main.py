@@ -1,9 +1,25 @@
+import pickle
+
 from classes import Employee, Staff
 from functions import parse_input
 
 
+def save_data(book, filename="staff.pkl"):
+    with open(filename, "wb") as f:
+        pickle.dump(book, f)
+
+
+def load_data(filename="staff.pkl"):
+    try:
+        with open(filename, "rb") as f:
+            return pickle.load(f)
+    except FileNotFoundError:
+        return Staff()
+
+
 def main():
-    book = Staff()
+    book = load_data()
+
     methods = {
         "ap": Employee.add_position,
         "cp": Employee.edit_position,
@@ -41,10 +57,12 @@ def main():
 
             if command == "close":
                 print("Good bye")
+                save_data(book)
                 break
 
             elif command == "exit":
                 print("Have a nice day")
+                save_data(book)
                 break
 
             elif command == "all-info":

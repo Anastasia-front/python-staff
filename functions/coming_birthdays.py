@@ -43,11 +43,9 @@ def coming_birthdays(book):
 
         for employee in upcoming_birthdays:
             birthday_date = employee.congratulation_date
-            formatted_birthday = datetime.strptime(str(birthday_date), "%d.%m.%Y").strftime(
-                "%d of %B"
-            )
+            formatted_birthday = datetime.strptime(
+                str(birthday_date), "%d.%m.%Y"
+            ).strftime("%d of %B")
             message += f"{formatted_birthday} - {employee.name}, {employee.age} years, will have a birthday on {datetime_object.strftime('%A')}\n"
 
-        print(message)
-
-    print("the end")
+        print(message, end="")
