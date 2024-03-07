@@ -1,5 +1,7 @@
 import pickle
 
+from colorama import Fore
+
 from classes import Employee, Staff
 from functions import parse_input
 
@@ -31,7 +33,35 @@ def main():
         "de": Employee.remove_employee,
     }
 
-    commands = [
+    def align_commands(commands):
+        lines = [command.split(" - ") for command in commands]
+
+        # Find the maximum length of the first and second parts
+        max_length_first = max(len(line[0]) for line in lines)
+        max_length_second = max(len(line[1]) if len(line) > 1 else 0 for line in lines)
+
+        # Format and add hyphens to create a table-like structure
+        formatted_commands = [
+            (
+                f"{line[0]:<{max_length_first}} | {line[1]:<{max_length_second}}"
+                if len(line) > 1
+                else line[0]
+            )
+            for line in lines
+        ]
+
+        # Add hyphens to separate columns
+        hyphen_line = f"{'-' * max_length_first} | {'-' * max_length_second}"
+
+        # Add newline and hyphen_line after each line
+        formatted_with_lines = [f"{line}\n{hyphen_line}" for line in formatted_commands]
+
+        return "\n".join(
+            [hyphen_line] + formatted_with_lines[:-1]
+        )  # Omit the last hyphen_line
+
+    # Example usage:
+    commands_list = [
         "ap/[name]/[position] - add position",
         "cp/[name]/[old_position]/[new_position] - change position",
         "fp/[name]  - find position",
@@ -42,26 +72,28 @@ def main():
         "de/[name]  - delete employee",
         "all-info - show all info",
         "all-b - show all birthdays",
-        "all-b-c - show all birthdays on current week",
+        "all-b-c - show all birthdays on the current week",
         "commands  - display all commands",
         "close  - close the program",
         "exit  - exit the program",
     ]
 
-    print("Book staff")
+    formatted_commands = align_commands(commands_list)
+
+    print(f"{Fore.LIGHTBLUE_EX}Book staff{Fore.RESET}")
 
     while True:
         try:
-            user_input = input("Enter a command: ")
+            user_input = input(f"{Fore.LIGHTGREEN_EX}Enter a command: {Fore.RESET}")
             command, *args = parse_input(user_input)
 
             if command == "close":
-                print("Good bye")
+                print(f"{Fore.LIGHTYELLOW_EX}Good bye{Fore.RESET}")
                 save_data(book)
                 break
 
             elif command == "exit":
-                print("Have a nice day")
+                print(f"{Fore.LIGHTYELLOW_EX}Have a nice day{Fore.RESET}")
                 save_data(book)
                 break
 
@@ -75,17 +107,18 @@ def main():
                 book.show_coming_birthdays()
 
             elif command in methods:
-                print((methods[command])(args, book))
+                print(
+                    f"{Fore.LIGHTBLUE_EX}{(methods[command])(args, book)}{Fore.RESET}"
+                )
 
             elif command == "commands":
-                for cmd in commands:
-                    print(cmd)
+                print(f"{Fore.MAGENTA}{formatted_commands}{Fore.RESET}")
 
             else:
-                print("Invalid command.")
+                print(f"{Fore.LIGHTRED_EX}Invalid command{Fore.RESET}")
 
         except ValueError as e:
-            print(e)
+            print(f"{Fore.LIGHTRED_EX}{e}{Fore.RESET}")
             continue  # Continue to the next iteration of the loop
 
 

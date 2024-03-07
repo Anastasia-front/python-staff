@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+from colorama import Fore
 
 current_datetime = datetime.now()
 current_year = current_datetime.year
@@ -8,7 +9,7 @@ def coming_birthdays(book):
     upcoming_birthdays = []
 
     if not book:
-        print("no birthdays")
+        print(f"{Fore.LIGHTMAGENTA_EX}no birthdays{Fore.RESET}")
 
     for name, employee in book.items():
         date = employee.birthday
@@ -46,6 +47,6 @@ def coming_birthdays(book):
             formatted_birthday = datetime.strptime(
                 str(birthday_date), "%d.%m.%Y"
             ).strftime("%d of %B")
-            message += f"{formatted_birthday} - {employee.name}, {employee.age} years, will have a birthday on {datetime_object.strftime('%A')}\n"
+            message += f"{Fore.LIGHTMAGENTA_EX}{formatted_birthday} - {employee.name}, {employee.age} years, will have a birthday on {datetime_object.strftime('%A')}\n{Fore.RESET}"
 
         print(message, end="")

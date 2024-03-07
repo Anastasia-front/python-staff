@@ -157,7 +157,7 @@ class Employee:
         for name, record in book.data.items():
             if name == employee:
                 if record.positions:
-                    return record.positions
+                    return record.positions.value
                 else:
                     return "employee has no position"
             else:

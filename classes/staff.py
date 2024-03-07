@@ -1,5 +1,7 @@
 from collections import UserDict
 
+from colorama import Fore
+
 from functions import coming_birthdays
 
 from .employee import Employee
@@ -14,11 +16,13 @@ class Staff(UserDict):
 
     def show_all(self):
         for name, record in self.data.items():
-            print(record)
+            print(f"{Fore.LIGHTCYAN_EX}{record}{Fore.RESET}")
 
     def show_all_birthdays(self):
         for name, record in self.data.items():
-            print(f" - Name: {name} | Birthday date: {record.birthday}")
+            print(
+                f"{Fore.CYAN} - Name: {name} | Birthday date: {record.birthday}{Fore.RESET}"
+            )
 
     def show_coming_birthdays(self):
         coming_birthdays(self)
