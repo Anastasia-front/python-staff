@@ -39,7 +39,7 @@ def coming_birthdays(book):
             employee.congratulation_date = date
             upcoming_birthdays.append(employee)
 
-        message = "List for congratulations on the current week:\n"
+        message = "list for congratulations on the current week:\n"
         employee.age = employee.calculate_age()
 
         for employee in upcoming_birthdays:

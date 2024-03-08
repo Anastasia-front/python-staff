@@ -33,7 +33,10 @@ class Employee:
         if not exist:
             return "employee not found"
         else:
-            return f"{exist.name} is {exist.calculate_age()} y.o"
+            if exist.birthday:
+                return f"{exist.name} is {exist.calculate_age()} y.o"
+            else:
+                return f"there is no information about {exist.name}'s birthday"
 
     @classmethod
     def add_position(cls, args: list, book):
@@ -159,7 +162,7 @@ class Employee:
                 if record.positions:
                     return record.positions.value
                 else:
-                    return "employee has no position"
+                    return "employee has no info about position"
             else:
                 continue
         return "employee not found"
@@ -177,7 +180,7 @@ class Employee:
                 if record.birthday:
                     return record.birthday
                 else:
-                    return "employee has no birthday"
+                    return "employee has no info about birthday"
             else:
                 continue
         return "employee not found"
@@ -229,10 +232,10 @@ class Employee:
 
         birthday_info = ""
         if self.birthday:
-            birthday_info = f"Birthday date: {self.birthday.value.strftime('%d.%m.%Y')}"
+            birthday_info = f"birthday date: {self.birthday.value.strftime('%d.%m.%Y')}"
 
         positions_info = ", ".join(str(p) for p in self.positions)
 
         return (
-            f"      - Name: {self.name} | Position: {positions_info} |  {birthday_info}"
+            f"      - name: {self.name} | position: {positions_info} |  {birthday_info}"
         )

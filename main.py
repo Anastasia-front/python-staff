@@ -88,12 +88,12 @@ def main():
             command, *args = parse_input(user_input)
 
             if command == "close":
-                print(f"{Fore.LIGHTYELLOW_EX}Good bye{Fore.RESET}")
+                print(f"{Fore.LIGHTYELLOW_EX}good bye{Fore.RESET}")
                 save_data(book)
                 break
 
             elif command == "exit":
-                print(f"{Fore.LIGHTYELLOW_EX}Have a nice day{Fore.RESET}")
+                print(f"{Fore.LIGHTYELLOW_EX}have a nice day{Fore.RESET}")
                 save_data(book)
                 break
 
@@ -115,7 +115,7 @@ def main():
                 print(f"{Fore.MAGENTA}{formatted_commands}{Fore.RESET}")
 
             else:
-                print(f"{Fore.LIGHTRED_EX}Invalid command{Fore.RESET}")
+                print(f"{Fore.LIGHTRED_EX}invalid command{Fore.RESET}")
 
         except ValueError as e:
             print(f"{Fore.LIGHTRED_EX}{e}{Fore.RESET}")
