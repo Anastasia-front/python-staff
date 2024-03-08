@@ -73,7 +73,7 @@ def main():
 
     formatted_commands = align_commands(commands_list)
 
-    print(f"{Fore.LIGHTBLUE_EX}Book staff{Fore.RESET}")
+    print(f"{Fore.LIGHTBLUE_EX}BOOK STAFF{Fore.RESET}")
 
     while True:
         try:
