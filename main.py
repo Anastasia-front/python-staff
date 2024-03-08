@@ -55,18 +55,18 @@ def main():
         return "\n".join([hyphen_line] + formatted_with_lines[:-1])
 
     commands_list = [
+        "commands  - display all commands",
         "ap/[name]/[position] - add position",
         "cp/[name]/[old_position]/[new_position] - change position",
-        "fp/[name]  - find position",
+        "fp/[name](format: name surname )  - find position",
         "dp/[name]  - delete position",
-        "ab/[name]/[date]  - add birthday",
+        "ab/[name]/[date](format: 09.09.1999)  - add birthday",
         "fb/[name]  - find birthday",
         "ga/[name]  - get age",
         "de/[name]  - delete employee",
         "all-info - show all info",
         "all-b - show all birthdays",
         "all-b-c - show all birthdays on the current week",
-        "commands  - display all commands",
         "close  - close the program",
         "exit  - exit the program",
     ]
@@ -96,7 +96,7 @@ def main():
             elif command == "all-b":
                 book.show_all_birthdays()
 
-            elif command == "all-c-b":
+            elif command == "all-b-c":
                 book.show_coming_birthdays()
 
             elif command in methods:

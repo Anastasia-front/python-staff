@@ -17,7 +17,6 @@ class Staff(UserDict):
     def show_all(self):
         if len(self.data.items()) != 0:
             for name, record in self.data.items():
-
                 print(f"{Fore.LIGHTCYAN_EX}{record}{Fore.RESET}")
         else:
             print(f"{Fore.LIGHTCYAN_EX}no information yet{Fore.RESET}")
@@ -25,9 +24,10 @@ class Staff(UserDict):
     def show_all_birthdays(self):
         if len(self.data.items()) != 0:
             for name, record in self.data.items():
-                print(
-                    f"{Fore.CYAN} - name: {name} | birthday date: {record.birthday}{Fore.RESET}"
-                )
+                if record.birthday:
+                    print(
+                        f"{Fore.CYAN} - name: {name} | birthday date: {record.birthday}{Fore.RESET}"
+                    )
         else:
             print(f"{Fore.CYAN}no information yet{Fore.RESET}")
 
