@@ -3,7 +3,7 @@ import pickle
 from colorama import Fore
 
 from classes import Employee, Staff
-from functions import parse_input
+from functions import parse_input, table_output
 
 
 def save_data(book, filename="staff.pkl"):
@@ -33,27 +33,6 @@ def main():
         "de": Employee.remove_employee,
     }
 
-    def align_commands(commands):
-        lines = [command.split(" - ") for command in commands]
-
-        max_length_first = max(len(line[0]) for line in lines)
-        max_length_second = max(len(line[1]) if len(line) > 1 else 0 for line in lines)
-
-        formatted_commands = [
-            (
-                f"{line[0]:<{max_length_first}} | {line[1]:<{max_length_second}}"
-                if len(line) > 1
-                else line[0]
-            )
-            for line in lines
-        ]
-
-        hyphen_line = f"{'-' * max_length_first} | {'-' * max_length_second}"
-
-        formatted_with_lines = [f"{line}\n{hyphen_line}" for line in formatted_commands]
-
-        return "\n".join([hyphen_line] + formatted_with_lines[:-1])
-
     commands_list = [
         "commands  - display all commands",
         "ap/[name]/[position] - add position",
@@ -71,7 +50,7 @@ def main():
         "exit  - exit the program",
     ]
 
-    formatted_commands = align_commands(commands_list)
+    formatted_commands = table_output(commands_list, "commands")
 
     print(f"{Fore.LIGHTBLUE_EX}BOOK STAFF{Fore.RESET}")
 

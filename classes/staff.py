@@ -2,7 +2,7 @@ from collections import UserDict
 
 from colorama import Fore
 
-from functions import coming_birthdays
+from functions import coming_birthdays, table_output
 
 from .employee import Employee
 
@@ -17,7 +17,9 @@ class Staff(UserDict):
     def show_all(self):
         if len(self.data.items()) != 0:
             for name, record in self.data.items():
-                print(f"{Fore.LIGHTCYAN_EX}{record}{Fore.RESET}")
+                print(
+                    f"{Fore.LIGHTCYAN_EX}{table_output(record,'employee_info')}{Fore.RESET}"
+                )
         else:
             print(f"{Fore.LIGHTCYAN_EX}no information yet{Fore.RESET}")
 
@@ -26,7 +28,7 @@ class Staff(UserDict):
             for name, record in self.data.items():
                 if record.birthday:
                     print(
-                        f"{Fore.CYAN} - name: {name} | birthday date: {record.birthday}{Fore.RESET}"
+                        f"{Fore.CYAN}{table_output(record,'employee_birthday')}{Fore.RESET}"
                     )
         else:
             print(f"{Fore.CYAN}no information yet{Fore.RESET}")

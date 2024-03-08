@@ -188,10 +188,8 @@ class Employee:
 
         birthday_info = ""
         if self.birthday:
-            birthday_info = f"birthday date: {self.birthday.value.strftime('%d.%m.%Y')}"
+            birthday_info = self.birthday.value.strftime("%d.%m.%Y")
 
         positions_info = ", ".join(str(p) for p in self.positions)
 
-        return (
-            f"      - name: {self.name} | position: {positions_info} |  {birthday_info}"
-        )
+        return f"{self.name} - {positions_info} -  {birthday_info} - {self.age} y.o."
