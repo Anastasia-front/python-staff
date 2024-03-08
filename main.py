@@ -36,11 +36,9 @@ def main():
     def align_commands(commands):
         lines = [command.split(" - ") for command in commands]
 
-        # Find the maximum length of the first and second parts
         max_length_first = max(len(line[0]) for line in lines)
         max_length_second = max(len(line[1]) if len(line) > 1 else 0 for line in lines)
 
-        # Format and add hyphens to create a table-like structure
         formatted_commands = [
             (
                 f"{line[0]:<{max_length_first}} | {line[1]:<{max_length_second}}"
@@ -50,17 +48,12 @@ def main():
             for line in lines
         ]
 
-        # Add hyphens to separate columns
         hyphen_line = f"{'-' * max_length_first} | {'-' * max_length_second}"
 
-        # Add newline and hyphen_line after each line
         formatted_with_lines = [f"{line}\n{hyphen_line}" for line in formatted_commands]
 
-        return "\n".join(
-            [hyphen_line] + formatted_with_lines[:-1]
-        )  # Omit the last hyphen_line
+        return "\n".join([hyphen_line] + formatted_with_lines[:-1])
 
-    # Example usage:
     commands_list = [
         "ap/[name]/[position] - add position",
         "cp/[name]/[old_position]/[new_position] - change position",
@@ -119,7 +112,7 @@ def main():
 
         except ValueError as e:
             print(f"{Fore.LIGHTRED_EX}{e}{Fore.RESET}")
-            continue  # Continue to the next iteration of the loop
+            continue
 
 
 if __name__ == "__main__":

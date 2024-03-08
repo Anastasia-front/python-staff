@@ -29,10 +29,8 @@ def coming_birthdays(book):
 
             target_day = datetime_object.day
 
-            # Calculate the number of days until the next birthday
             days_until_birthday = (datetime_object - current_datetime).days
 
-            # Check if the birthday is within the next week
             if 0 <= days_until_birthday <= 7:
                 date = str(current_year) + date[4:8] + str(target_day)
 
