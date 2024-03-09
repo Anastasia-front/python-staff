@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta
+
 from colorama import Fore
 
 current_datetime = datetime.now()
@@ -15,7 +16,7 @@ def coming_birthdays(book):
         date = employee.birthday
 
         if not date:
-            continue
+            print(f"no information about birthday of {employee.name}", end="")
         else:
             datetime_object = datetime.strptime(str(date), "%d.%m.%Y")
             day = datetime_object.weekday()

@@ -60,12 +60,12 @@ def main():
             command, *args = parse_input(user_input)
 
             if command == "close":
-                print(f"{Fore.LIGHTYELLOW_EX}good bye{Fore.RESET}")
+                print(f"{Fore.CYAN}good bye{Fore.RESET}")
                 save_data(book)
                 break
 
             elif command == "exit":
-                print(f"{Fore.LIGHTYELLOW_EX}have a nice day{Fore.RESET}")
+                print(f"{Fore.CYAN}have a nice day{Fore.RESET}")
                 save_data(book)
                 break
 

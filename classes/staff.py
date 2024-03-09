@@ -16,22 +16,26 @@ class Staff(UserDict):
 
     def show_all(self):
         if len(self.data.items()) != 0:
+            employees = []
             for name, record in self.data.items():
-                print(
-                    f"{Fore.LIGHTCYAN_EX}{table_output(record,'employee_info')}{Fore.RESET}"
-                )
+                employees.append(str(record))
+            print(f"{Fore.LIGHTCYAN_EX}{table_output(employees,'employee_info')}")
+
         else:
             print(f"{Fore.LIGHTCYAN_EX}no information yet{Fore.RESET}")
 
     def show_all_birthdays(self):
         if len(self.data.items()) != 0:
+            birthdays = []
+
             for name, record in self.data.items():
                 if record.birthday:
-                    print(
-                        f"{Fore.CYAN}{table_output(record,'employee_birthday')}{Fore.RESET}"
-                    )
+                    birthdays.append(f"{record.name.value} - {record.birthday}")
+                else:
+                    print(f"{Fore.LIGHTYELLOW_EX}no information yet{Fore.RESET}")
+            print(f"{Fore.LIGHTYELLOW_EX}{table_output(birthdays,'employee_birthday')}")
         else:
-            print(f"{Fore.CYAN}no information yet{Fore.RESET}")
+            print(f"{Fore.LIGHTYELLOW_EX}no information yet{Fore.RESET}")
 
     def show_coming_birthdays(self):
         coming_birthdays(self)

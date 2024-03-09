@@ -19,6 +19,7 @@ class Employee:
         if self.birthday:
             str_birthday = str(self.birthday)
             birth_year = int(str_birthday.split(".")[2])
+            self.age = current_year - birth_year
             return current_year - birth_year
 
     @classmethod
@@ -67,6 +68,7 @@ class Employee:
                 return "employee not found"
             else:
                 exist.birthday = Birthday(date)
+                exist.calculate_age()
                 return "birthday added"
         except ValueError:
             return "invalid date format. Use DD.MM.YYYY"
@@ -185,11 +187,12 @@ class Employee:
         return "employee not found"
 
     def __str__(self):
+        birthday_info = (
+            self.birthday.value.strftime("%d.%m.%Y") if self.birthday else "no info"
+        )
 
-        birthday_info = ""
-        if self.birthday:
-            birthday_info = self.birthday.value.strftime("%d.%m.%Y")
+        age = f"{self.age} y.o." if self.age else "no info"
 
         positions_info = ", ".join(str(p) for p in self.positions)
 
-        return f"{self.name} - {positions_info} -  {birthday_info} - {self.age} y.o."
+        return f"{self.name} - {positions_info} -  {birthday_info} - {age}"

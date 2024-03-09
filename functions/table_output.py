@@ -8,6 +8,19 @@ def table_output(lines, type):
         "employee_birthday": ["name", "birthday date"],
     }
 
+    color = {
+        "fore": {
+            "commands": Fore.MAGENTA,
+            "employee_info": Fore.LIGHTCYAN_EX,
+            "employee_birthday": Fore.LIGHTYELLOW_EX,
+        },
+        "back": {
+            "commands": Back.MAGENTA,
+            "employee_info": Back.LIGHTCYAN_EX,
+            "employee_birthday": Back.LIGHTYELLOW_EX,
+        },
+    }
+
     headings = heading_types.get(type, [])
 
     if not headings:
@@ -16,16 +29,19 @@ def table_output(lines, type):
     lines = [line.split(" - ") for line in lines]
 
     max_lengths = [
-        max(len(line[i]) if len(line) > i else 0 for line in lines)
+        max(
+            len(headings[i]),
+            max(len(line[i]) if len(line) > i else 0 for line in lines),
+        )
         for i in range(len(headings))
     ]
 
     formatted_headings = " | ".join(
-        f"{Back.MAGENTA}{Fore.BLACK}{headings[i]:<{max_lengths[i]}}{Fore.RESET}{Back.RESET}"
+        f"{color['back'][type]}{Fore.BLACK}{headings[i]:<{max_lengths[i]}}{color['fore'][type]}{Back.RESET}"
         for i in range(len(headings))
     )
 
-    hyphen_line = " | ".join("-" * max_lengths[i] for i in range(len(headings)))
+    hyphen_line = " | ".join(f"{color['fore'][type]}-" * max_lengths[i] for i in range(len(headings)))
 
     formatted_lines = [
         " | ".join(
@@ -36,7 +52,7 @@ def table_output(lines, type):
     ]
 
     formatted_with_lines = [
-        f"{Fore.MAGENTA}{formatted_lines[i]}\n{hyphen_line}{Fore.RESET}"
+        f"{color['fore'][type]}{formatted_lines[i]}\n{hyphen_line}{Fore.RESET}"
         for i in range(len(formatted_lines))
     ]
 
