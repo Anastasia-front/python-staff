@@ -66,6 +66,8 @@ class Employee:
             exist = book.find(name)
             if not exist:
                 return "employee not found"
+            elif exist.birthday:
+                return "employee has already had birthday info"
             else:
                 exist.birthday = Birthday(date)
                 exist.calculate_age()
@@ -160,10 +162,12 @@ class Employee:
 
         for name, record in book.data.items():
             if name == employee:
-                if record.positions:
-                    return record.positions.value
-                else:
-                    return "employee has no info about position"
+                positions_values = [position.value for position in record.positions]
+                return (
+                    ", ".join(positions_values)
+                    if positions_values
+                    else "employee has no info about position"
+                )
             else:
                 continue
         return "employee not found"

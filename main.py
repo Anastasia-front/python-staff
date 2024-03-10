@@ -28,6 +28,8 @@ def main():
         "fp": Employee.find_position,
         "dp": Employee.remove_position,
         "ab": Employee.add_birthday,
+        "cb": Employee.edit_birthday,
+        "db": Employee.remove_birthday,
         "fb": Employee.find_birthday,
         "ga": Employee.get_age,
         "de": Employee.remove_employee,
@@ -41,6 +43,8 @@ def main():
         "dp/[name]  - delete position",
         "ab/[name]/[date](format: 09.09.1999)  - add birthday",
         "fb/[name]  - find birthday",
+        "cb/[name]  - change birthday",
+        "db/[name]  - delete birthday",
         "ga/[name]  - get age",
         "de/[name]  - delete employee",
         "all-info - show all info",
@@ -60,12 +64,12 @@ def main():
             command, *args = parse_input(user_input)
 
             if command == "close":
-                print(f"{Fore.CYAN}good bye{Fore.RESET}")
+                print(f"{Fore.GREEN}good bye{Fore.RESET}")
                 save_data(book)
                 break
 
             elif command == "exit":
-                print(f"{Fore.CYAN}have a nice day{Fore.RESET}")
+                print(f"{Fore.GREEN}have a nice day{Fore.RESET}")
                 save_data(book)
                 break
 
