@@ -39,7 +39,7 @@ def main():
         "commands - display all commands",
         "ap/[name]/[position] - add position",
         "cp/[name]/[old_position]/[new_position] - change position",
-        "fp/[name](format: name surname ) - find position",
+        "fp/[name](format: name surname) - find position",
         "dp/[name]/[position] - delete position",
         "ab/[name]/[date](format: 09.09.1999) - add birthday",
         "fb/[name] - find birthday",
@@ -64,12 +64,12 @@ def main():
             command, *args = parse_input(user_input)
 
             if command == "close":
-                print(f"{Fore.GREEN}good bye{Fore.RESET}")
+                print(f"{Fore.BLUE}GOOD BYE{Fore.RESET}")
                 save_data(book)
                 break
 
             elif command == "exit":
-                print(f"{Fore.GREEN}have a nice day{Fore.RESET}")
+                print(f"{Fore.BLUE}HAVE A NICE DAY{Fore.RESET}")
                 save_data(book)
                 break
 

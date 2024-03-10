@@ -91,7 +91,7 @@ class Employee:
 
     @classmethod
     def remove_birthday(cls, args: list, book):
-        if len(args) < 2:
+        if len(args) < 1:
             return "provide name of the employee"
 
         name = args[0]
@@ -101,6 +101,7 @@ class Employee:
             return "employee not found"
         else:
             exist.birthday = None
+            exist.age = None
             return "birthday deleted"
 
     @classmethod
