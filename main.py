@@ -36,22 +36,22 @@ def main():
     }
 
     commands_list = [
-        "commands  - display all commands",
+        "commands - display all commands",
         "ap/[name]/[position] - add position",
         "cp/[name]/[old_position]/[new_position] - change position",
-        "fp/[name](format: name surname )  - find position",
-        "dp/[name]  - delete position",
-        "ab/[name]/[date](format: 09.09.1999)  - add birthday",
-        "fb/[name]  - find birthday",
-        "cb/[name]  - change birthday",
-        "db/[name]  - delete birthday",
-        "ga/[name]  - get age",
-        "de/[name]  - delete employee",
+        "fp/[name](format: name surname ) - find position",
+        "dp/[name]/[position] - delete position",
+        "ab/[name]/[date](format: 09.09.1999) - add birthday",
+        "fb/[name] - find birthday",
+        "cb/[name]/[date] - change birthday",
+        "db/[name] - delete birthday",
+        "ga/[name] - get age",
+        "de/[name] - delete employee",
         "all-info - show all info",
         "all-b - show all birthdays",
         "all-b-c - show all birthdays on the current week",
-        "close  - close the program",
-        "exit  - exit the program",
+        "close - close the program",
+        "exit - exit the program",
     ]
 
     formatted_commands = table_output(commands_list, "commands")

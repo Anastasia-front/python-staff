@@ -6,6 +6,12 @@ def table_output(lines, type):
         "commands": ["input", "description"],
         "employee_info": ["name", "position", "birthday date", "age"],
         "employee_birthday": ["name", "birthday date"],
+        "coming_birthdays": [
+            "name",
+            "birthday date",
+            "day of congratulation",
+            "age",
+        ],
     }
 
     color = {
@@ -13,11 +19,13 @@ def table_output(lines, type):
             "commands": Fore.MAGENTA,
             "employee_info": Fore.LIGHTCYAN_EX,
             "employee_birthday": Fore.LIGHTYELLOW_EX,
+            "coming_birthdays": Fore.LIGHTWHITE_EX,
         },
         "back": {
             "commands": Back.MAGENTA,
             "employee_info": Back.LIGHTCYAN_EX,
             "employee_birthday": Back.LIGHTYELLOW_EX,
+            "coming_birthdays": Back.LIGHTWHITE_EX,
         },
     }
 
@@ -41,7 +49,9 @@ def table_output(lines, type):
         for i in range(len(headings))
     )
 
-    hyphen_line = " | ".join(f"{color['fore'][type]}-" * max_lengths[i] for i in range(len(headings)))
+    hyphen_line = " | ".join(
+        f"{color['fore'][type]}-" * max_lengths[i] for i in range(len(headings))
+    )
 
     formatted_lines = [
         " | ".join(

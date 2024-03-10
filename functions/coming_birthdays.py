@@ -2,6 +2,8 @@ from datetime import datetime, timedelta
 
 from colorama import Fore
 
+from .table_output import table_output
+
 current_datetime = datetime.now()
 current_year = current_datetime.year
 
@@ -10,7 +12,7 @@ def coming_birthdays(book):
     upcoming_birthdays = []
 
     if not book:
-        print(f"{Fore.LIGHTMAGENTA_EX}no birthdays{Fore.RESET}")
+        print(f"{Fore.LIGHTWHITE_EX}no birthdays{Fore.RESET}")
 
     for name, employee in book.items():
         date = employee.birthday
@@ -30,22 +32,18 @@ def coming_birthdays(book):
 
             target_day = datetime_object.day
 
-            days_until_birthday = (datetime_object - current_datetime).days
+            # days_until_birthday = (datetime_object - current_datetime).days
 
-            if 0 <= days_until_birthday <= 7:
-                date = str(current_year) + date[4:8] + str(target_day)
+            # if 0 <= days_until_birthday <= 7:
+            date = date.value.replace(year=current_year, day=target_day)
+            date = date.strftime("%A, %d of %B")
+            upcoming_birthdays.append(
+                f"{employee.name.value} - {employee.birthday} - {date} - {employee.age} y.o."
+            )
 
-            employee.congratulation_date = date
-            upcoming_birthdays.append(employee)
-
-        message = "list for congratulations on the current week:\n"
-        employee.age = employee.calculate_age()
-
-        for employee in upcoming_birthdays:
-            birthday_date = employee.congratulation_date
-            formatted_birthday = datetime.strptime(
-                str(birthday_date), "%d.%m.%Y"
-            ).strftime("%d of %B")
-            message += f"{Fore.LIGHTMAGENTA_EX}{formatted_birthday} - {employee.name}, {employee.age} years, will have a birthday on {datetime_object.strftime('%A')}\n{Fore.RESET}"
-
-        print(message, end="")
+    if len(upcoming_birthdays) != 0:
+        print(table_output(upcoming_birthdays, "coming_birthdays"))
+    else:
+        print(
+            f"{Fore.LIGHTWHITE_EX}there is no one birthday on current week{Fore.RESET}"
+        )
