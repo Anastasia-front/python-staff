@@ -18,7 +18,8 @@ def coming_birthdays(book):
         date = employee.birthday
 
         if not date:
-            print(f"no information about birthday of {employee.name}")
+            # print(f"no information about birthday of {employee.name}")
+            continue
         else:
             datetime_object = datetime.strptime(str(date), "%d.%m.%Y")
             day = datetime_object.weekday()
@@ -44,4 +45,4 @@ def coming_birthdays(book):
     if len(upcoming_birthdays) != 0:
         print(table_output(upcoming_birthdays, "coming_birthdays"))
     else:
-        print(f"{Fore.LIGHTWHITE_EX}there is no one birthday{Fore.RESET}")
+        print(f"{Fore.LIGHTWHITE_EX}there is no one birthday info{Fore.RESET}")

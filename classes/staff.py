@@ -31,8 +31,6 @@ class Staff(UserDict):
             for name, record in self.data.items():
                 if record.birthday:
                     birthdays.append(f"{record.name.value} - {record.birthday}")
-                else:
-                    print(f"{Fore.LIGHTYELLOW_EX}no information yet{Fore.RESET}")
             print(f"{Fore.LIGHTYELLOW_EX}{table_output(birthdays,'employee_birthday')}")
         else:
             print(f"{Fore.LIGHTYELLOW_EX}no information yet{Fore.RESET}")
