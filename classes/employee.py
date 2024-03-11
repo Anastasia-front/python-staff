@@ -17,10 +17,16 @@ class Employee:
 
     def calculate_age(self):
         if self.birthday:
-            str_birthday = str(self.birthday)
-            birth_year = int(str_birthday.split(".")[2])
-            self.age = current_year - birth_year
-            return current_year - birth_year
+            birth_date = self.birthday.value
+            current_date = datetime.now()
+
+            age_delta = current_date - birth_date
+            years = age_delta.days // 365
+
+            self.age = years
+            return years
+        else:
+            return None
 
     @classmethod
     def get_age(cls, args: list, book):
@@ -149,6 +155,7 @@ class Employee:
                 return "employee not found"
             else:
                 exist.birthday = Birthday(date)
+                exist.calculate_age()
                 return "birthday changed"
         except ValueError:
             return "invalid date format. Use DD.MM.YYYY"
